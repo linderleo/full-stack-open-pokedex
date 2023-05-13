@@ -3,11 +3,11 @@ name: Deployment pipeline
 on:
   push:
     branches: ["main", "master"]
+env:
+  ELECTRON_EXTRA_LAUNCH_ARGS: "--disable-gpu"
 
 jobs:
   simple_deployment_pipeline:
-    env:
-      ELECTRON_EXTRA_LAUNCH_ARGS: "--disable-gpu"
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -18,13 +18,13 @@ jobs:
         run: npm install
       - name: Check style
         run: npm run eslint
-      - name: Build the project
-        run: npm run build
       - name: Run unit tests
         run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
+          build: npm run build
           command: npm run test:e2e
           start: npm run start-prod
+          browser: chrome
           wait-on: http://localhost:5000
