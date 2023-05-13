@@ -29,4 +29,9 @@ module.exports = {
   globals: {
     process: "readonly",
   },
+  settings: {
+    react: {
+      version: "detect", // Specify the React version as "detect"
+    },
+  },
 };
