@@ -6,6 +6,8 @@ on:
 
 jobs:
   simple_deployment_pipeline:
+    env:
+      ELECTRON_EXTRA_LAUNCH_ARGS: "--disable-gpu"
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
