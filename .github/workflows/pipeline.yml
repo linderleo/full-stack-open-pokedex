@@ -3,9 +3,6 @@ name: Deployment pipeline
 on:
   push:
     branches: ["main", "master"]
-env:
-  ELECTRON_EXTRA_LAUNCH_ARGS: "--disable-gpu"
-
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-22.04
@@ -26,5 +23,7 @@ jobs:
           build: npm run build
           command: npm run test:e2e
           start: npm run start-prod
-          browser: chrome
           wait-on: http://localhost:5000
+        env:
+          ELECTRON_BROWSER: chrome
+          ELECTRON_DISABLE_GPU: "1"
